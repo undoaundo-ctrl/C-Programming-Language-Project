@@ -1,2 +1,2 @@
-# Cube-in-C-programming-Language-
-Hello Im make some Cube in C
+# C-programming-language-Project
+Hello Im make some Nice things in C
