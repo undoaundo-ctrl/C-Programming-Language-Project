@@ -1,2 +1,2 @@
-# C and Asssembly-programming-language-Project
-Hello Im make some Nice things in C and assembly 
+# C and Nix-programming-language-Project
+Hello Im make some Nice things in C and Nix
