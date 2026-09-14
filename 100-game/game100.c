@@ -24,6 +24,41 @@ int main(void) {
 
     print_banner();
     print_rules();
+
+    int total = 0;
+    int human_turn;
+
+    printf("Would you like to go first? (y/n): ");
+    char first;
+    scanf(" %c", &first);
+    human_turn = (first == 'y' || first == 'Y');
+
+    while (total < TARGET) {
+        int move;
+
+        if (human_turn) {
+            move = get_human_move(total);
+            printf("You added %d. ", move);
+        } else {
+            move = get_computer_move(total);
+            printf("Computer added %d. ", move);
+        }
+
+        total += move;
+        printf("Total is now %d.\n", total);
+
+        if (total >= TARGET) {
+            if (human_turn) {
+                printf("\nCongratulations! You reached %d and won!\n", TARGET);
+            } else {
+                printf("\nThe computer reached %d and won. Better luck next time!\n", TARGET);
+            }
+            break;
+        }
+
+        human_turn = !human_turn;
+    }
+
     return 0;
 }
 
