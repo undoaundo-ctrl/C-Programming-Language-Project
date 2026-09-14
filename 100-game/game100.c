@@ -20,6 +20,8 @@ int  get_computer_move(int total);
 int  read_int_in_range(int lo, int hi);
 
 int main(void) {
+    srand((unsigned)time(NULL));
+
     print_banner();
     print_rules();
     return 0;
@@ -63,4 +65,21 @@ int get_human_move(int total) {
 
     printf("Current total: %d. Choose a number between %d and %d: ", total, MIN_MOVE, hi);
     return read_int_in_range(MIN_MOVE, hi);
+}
+
+int get_computer_move(int total) {
+    int remaining = TARGET - total;
+    int hi = (remaining < MAX_MOVE) ? remaining : MAX_MOVE;
+    int move;
+
+    /* Optimal strategy: try to leave the total as a multiple of 11. */
+    int ideal = (total % 11 == 0) ? MAX_MOVE : (11 - (total % 11));
+
+    if (ideal >= MIN_MOVE && ideal <= hi) {
+        move = ideal;
+    } else {
+        move = (rand() % hi) + 1;
+    }
+
+    return move;
 }
