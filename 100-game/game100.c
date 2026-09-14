@@ -3,6 +3,9 @@
  * ------------------------
  * Two players take turns adding a number between 1 and 10 to a running
  * total. The player who makes the total reach exactly 100 wins.
+ *
+ * You can play against the computer, which uses the optimal strategy:
+ * always leave the running total as a multiple of 11 after its move.
  */
 
 #include <stdio.h>
@@ -25,40 +28,48 @@ int main(void) {
     print_banner();
     print_rules();
 
-    int total = 0;
     int human_turn;
+    char again = 'y';
 
     printf("Would you like to go first? (y/n): ");
     char first;
     scanf(" %c", &first);
     human_turn = (first == 'y' || first == 'Y');
 
-    while (total < TARGET) {
-        int move;
+    while (again == 'y' || again == 'Y') {
+        int total = 0;
 
-        if (human_turn) {
-            move = get_human_move(total);
-            printf("You added %d. ", move);
-        } else {
-            move = get_computer_move(total);
-            printf("Computer added %d. ", move);
-        }
+        while (total < TARGET) {
+            int move;
 
-        total += move;
-        printf("Total is now %d.\n", total);
-
-        if (total >= TARGET) {
             if (human_turn) {
-                printf("\nCongratulations! You reached %d and won!\n", TARGET);
+                move = get_human_move(total);
+                printf("You added %d. ", move);
             } else {
-                printf("\nThe computer reached %d and won. Better luck next time!\n", TARGET);
+                move = get_computer_move(total);
+                printf("Computer added %d. ", move);
             }
-            break;
+
+            total += move;
+            printf("Total is now %d.\n", total);
+
+            if (total >= TARGET) {
+                if (human_turn) {
+                    printf("\nCongratulations! You reached %d and won!\n", TARGET);
+                } else {
+                    printf("\nThe computer reached %d and won. Better luck next time!\n", TARGET);
+                }
+                break;
+            }
+
+            human_turn = !human_turn;
         }
 
-        human_turn = !human_turn;
+        printf("\nPlay again? (y/n): ");
+        scanf(" %c", &again);
     }
 
+    printf("Thanks for playing!\n");
     return 0;
 }
 
