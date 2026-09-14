@@ -56,3 +56,11 @@ int read_int_in_range(int lo, int hi) {
 
     return value;
 }
+
+int get_human_move(int total) {
+    int remaining = TARGET - total;
+    int hi = (remaining < MAX_MOVE) ? remaining : MAX_MOVE;
+
+    printf("Current total: %d. Choose a number between %d and %d: ", total, MIN_MOVE, hi);
+    return read_int_in_range(MIN_MOVE, hi);
+}
