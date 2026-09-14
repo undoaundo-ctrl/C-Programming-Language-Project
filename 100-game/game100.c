@@ -36,3 +36,23 @@ void print_rules(void) {
     printf(" - Players take turns adding a number from %d to %d to a running total.\n", MIN_MOVE, MAX_MOVE);
     printf(" - The player who makes the total reach exactly %d wins.\n\n", TARGET);
 }
+
+int read_int_in_range(int lo, int hi) {
+    int value;
+    int ok;
+
+    do {
+        ok = scanf("%d", &value);
+        if (ok != 1) {
+            while (getchar() != '\n');
+            printf("Please enter a valid number: ");
+            continue;
+        }
+        if (value < lo || value > hi) {
+            printf("Please enter a number between %d and %d: ", lo, hi);
+            ok = 0;
+        }
+    } while (!ok);
+
+    return value;
+}
