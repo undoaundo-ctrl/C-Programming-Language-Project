@@ -20,6 +20,19 @@ int  get_computer_move(int total);
 int  read_int_in_range(int lo, int hi);
 
 int main(void) {
-    printf("Welcome to the 100 Game! (work in progress)\n");
+    print_banner();
+    print_rules();
     return 0;
+}
+
+void print_banner(void) {
+    printf("=====================================\n");
+    printf("           THE 100 GAME\n");
+    printf("=====================================\n\n");
+}
+
+void print_rules(void) {
+    printf("Rules:\n");
+    printf(" - Players take turns adding a number from %d to %d to a running total.\n", MIN_MOVE, MAX_MOVE);
+    printf(" - The player who makes the total reach exactly %d wins.\n\n", TARGET);
 }
